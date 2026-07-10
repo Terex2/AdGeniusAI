@@ -30,11 +30,23 @@ const AdGenerationPage = () => {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 dir-rtl text-right" dir="rtl">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">AdGenius AI</h1>
-          <p className="text-lg text-gray-600">موظف التسويق الذكي الخاص بك - من الفكرة إلى الحملة</p>
+          <div className="inline-block p-2 bg-blue-100 rounded-full mb-4">
+            <Layout className="text-blue-600 w-8 h-8" />
+          </div>
+          <h1 className="text-5xl font-black text-gray-900 mb-4 tracking-tight">AdGenius <span className="text-blue-600">AI</span></h1>
+          <p className="text-xl text-gray-600 font-medium">نظام الـ Multi-Agent المتكامل لقيادة حملاتك التسويقية</p>
+          <div className="mt-4 flex justify-center gap-4 text-sm text-gray-500">
+            <span className="flex items-center"><Target size={16} className="ml-1" /> بحث ذكي</span>
+            <span className="flex items-center"><PenTool size={16} className="ml-1" /> كتابة إبداعية</span>
+            <span className="flex items-center"><BarChart size={16} className="ml-1" /> تحليل استراتيجي</span>
+          </div>
         </div>
 
-        <div className="bg-white shadow-xl rounded-2xl p-8 mb-8">
+        <div className="bg-white shadow-2xl rounded-3xl p-8 mb-12 border border-gray-100">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <Send className="ml-2 text-blue-600" size={24} />
+            إنشاء حملة جديدة
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
