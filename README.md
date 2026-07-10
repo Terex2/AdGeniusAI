@@ -114,6 +114,16 @@ AdGeniusAI/
 
     افتح متصفحك وتوجه إلى `http://localhost:3000` لبدء استخدام AdGenius AI.
 
+## تجربة المشروع على Google Colab
+
+يمكنك تجربة المنصة بالكامل بضغطة زر واحدة عبر Google Colab دون الحاجة لتثبيت أي شيء على جهازك:
+
+1. افتح ملف `AdGeniusAI_Colab.ipynb` الموجود في المستودع.
+2. أو اضغط على الرابط التالي (إذا قمت برفع الملف على Colab):
+   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Terex2/AdGeniusAI/blob/main/AdGeniusAI_Colab.ipynb)
+3. قم بتشغيل جميع الخلايا (Run all) واتبع الروابط التي ستظهر في النهاية للوصول للواجهة.
+
+
 ## المراجع
 
 [1] [ATH-MaaS/Agentic-ADK - GitHub](https://github.com/AIDC-AI/Agentic-ADK)
