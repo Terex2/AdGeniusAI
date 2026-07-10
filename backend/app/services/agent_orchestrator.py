@@ -3,6 +3,7 @@ from app.agents.marketing_research_agent import MarketingResearchAgent
 from app.agents.copywriting_agent import CopywritingAgent
 from app.agents.creative_agent import CreativeAgent
 from app.agents.campaign_strategy_agent import CampaignStrategyAgent
+from app.agents.analytics_agent import AnalyticsAgent
 
 class AgentOrchestrator:
     def __init__(self):
@@ -10,6 +11,7 @@ class AgentOrchestrator:
         self.copywriting_agent = CopywritingAgent()
         self.creative_agent = CreativeAgent()
         self.strategy_agent = CampaignStrategyAgent()
+        self.analytics_agent = AnalyticsAgent()
 
     async def run_workflow(self, request: AdRequest) -> AdResponse:
         # 1. Marketing Research
@@ -24,10 +26,22 @@ class AgentOrchestrator:
         # 4. Campaign Strategy
         strategy_data = await self.strategy_agent.process(request, research_data, ad_copies, creative_data)
         
+        # 5. Analytics & Optimization (Self-Correction)
+        campaign_summary = {
+            "research": research_data,
+            "copies": ad_copies,
+            "creative": creative_data,
+            "strategy": strategy_data
+        }
+        analytics_feedback = await self.analytics_agent.process(campaign_summary)
+        
+        # دمج التحليل في الاستراتيجية النهائية
+        final_strategy = f"{strategy_data}\n\n## تحليل وتوصيات المحلل الذكي\n{analytics_feedback}"
+        
         return AdResponse(
             marketing_plan=research_data,
             ad_copies=ad_copies,
             creative_ideas=creative_data.get("image_ideas", []),
             video_scripts=creative_data.get("video_scripts", []),
-            marketing_strategy=strategy_data
+            marketing_strategy=final_strategy
         )
