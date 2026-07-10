@@ -9,18 +9,35 @@ class CopywritingAgent:
 
     async def process(self, request: AdRequest, research_data: str) -> List[str]:
         prompt = f"""
-        أنت كاتب إعلانات (Copywriter) محترف. بناءً على أبحاث التسويق التالية:
+        أنت كاتب إعلانات (Direct Response Copywriter) محترف، خبير في صياغة الإعلانات التي تحقق أعلى معدلات تحويل.
+
+        بناءً على أبحاث التسويق التالية:
         {research_data}
         
         وعلى بيانات المنتج:
         الاسم: {request.product_name}
         الوصف: {request.product_description}
+        السعر: {request.price}
+
+        المطلوب منك هو إنشاء 5 نسخ إعلانية متنوعة (Ad Copies) موجهة لمنصات التواصل الاجتماعي (Facebook, Instagram, Twitter, LinkedIn).
         
-        المطلوب:
-        إنشاء 5 نسخ إعلانية مختلفة (عناوين ووصف وCTA) تتناسب مع منصات التواصل الاجتماعي.
-        
-        قم بالرد بتنسيق JSON فقط كقائمة من النصوص:
-        ["نسخة 1", "نسخة 2", ...]
+        يجب أن تتبع كل نسخة الهيكل التالي:
+        - **العنوان (Headline)**: جذاب ومثير للفضول.
+        - **النص الرئيسي (Body Content)**: يركز على الفوائد (Benefits) وليس فقط الميزات، ويخاطب نقاط الألم لدى الجمهور.
+        - **الدعوة لاتخاذ إجراء (CTA)**: قوية وواضحة.
+
+        أنواع النسخ المطلوبة:
+        1. نسخة عاطفية (Emotional).
+        2. نسخة تعليمية/معلوماتية (Educational).
+        3. نسخة تركز على العرض والسعر (Offer-driven).
+        4. نسخة تعتمد على الدليل الاجتماعي (Social Proof - افتراضي).
+        5. نسخة قصيرة ومباشرة (Short & Direct).
+
+        قم بالرد بتنسيق JSON فقط كقائمة من الكائنات، كل كائن يحتوي على (headline, body, cta):
+        [
+          {{"headline": "...", "body": "...", "cta": "..."}},
+          ...
+        ]
         """
         response = await self.llm.get_response(prompt)
         try:

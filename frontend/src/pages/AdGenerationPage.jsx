@@ -121,10 +121,16 @@ const AdGenerationPage = () => {
                 <PenTool className="ml-2" />
                 <h2 className="text-xl font-bold">النصوص الإعلانية المقترحة</h2>
               </div>
-              <div className="grid gap-4">
+              <div className="grid gap-6">
                 {result.ad_copies.map((copy, index) => (
-                  <div key={index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    {copy}
+                  <div key={index} className="p-5 bg-gray-50 rounded-xl border border-gray-200 hover:border-green-300 transition-colors">
+                    <h3 className="font-bold text-lg text-green-800 mb-2">{typeof copy === 'object' ? copy.headline : `نسخة ${index + 1}`}</h3>
+                    <p className="text-gray-700 mb-4 leading-relaxed">{typeof copy === 'object' ? copy.body : copy}</p>
+                    {typeof copy === 'object' && copy.cta && (
+                      <div className="inline-block bg-green-600 text-white px-4 py-1 rounded text-sm font-bold">
+                        {copy.cta}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -136,11 +142,11 @@ const AdGenerationPage = () => {
                 <ImageIcon className="ml-2" />
                 <h2 className="text-xl font-bold">أفكار التصاميم والبصريات</h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {result.creative_ideas.map((idea, index) => (
-                  <div key={index} className="p-4 bg-purple-50 rounded-lg border border-purple-100">
-                    <p className="font-medium text-purple-800">فكرة تصميم {index + 1}:</p>
-                    <p className="text-gray-700 mt-1">{idea}</p>
+                  <div key={index} className="p-5 bg-purple-50 rounded-xl border border-purple-100 hover:border-purple-300 transition-colors">
+                    <h3 className="font-bold text-purple-800 mb-2">{typeof idea === 'object' ? idea.title : `فكرة تصميم ${index + 1}`}</h3>
+                    <p className="text-gray-700 leading-relaxed">{typeof idea === 'object' ? idea.description : idea}</p>
                   </div>
                 ))}
               </div>
@@ -152,11 +158,20 @@ const AdGenerationPage = () => {
                 <Layout className="ml-2" />
                 <h2 className="text-xl font-bold">سيناريوهات الفيديو (Reels/TikTok)</h2>
               </div>
-              <div className="space-y-4">
+              <div className="grid gap-6">
                 {result.video_scripts.map((script, index) => (
-                  <div key={index} className="p-4 bg-red-50 rounded-lg border border-red-100">
-                    <p className="font-medium text-red-800">سيناريو {index + 1}:</p>
-                    <p className="text-gray-700 mt-1 whitespace-pre-wrap">{script}</p>
+                  <div key={index} className="p-6 bg-red-50 rounded-xl border border-red-100 hover:border-red-300 transition-colors">
+                    <h3 className="font-bold text-lg text-red-800 mb-4">{typeof script === 'object' ? script.title : `سيناريو ${index + 1}`}</h3>
+                    {typeof script === 'object' ? (
+                      <div className="space-y-3 text-gray-700">
+                        <p><span className="font-bold text-red-600">الافتتاحية (Hook):</span> {script.hook}</p>
+                        <p><span className="font-bold text-red-600">المحتوى:</span> {script.content}</p>
+                        <p><span className="font-bold text-red-600">الخاتمة:</span> {script.cta}</p>
+                        <p><span className="font-bold text-red-600 text-sm">الصوت المقترح:</span> <span className="italic">{script.audio}</span></p>
+                      </div>
+                    ) : (
+                      <p className="whitespace-pre-wrap">{script}</p>
+                    )}
                   </div>
                 ))}
               </div>
